@@ -60,7 +60,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!savedToken) return null;
     return extractUserFromToken(savedToken) as User | null;
   });
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => !!localStorage.getItem(TOKEN_KEY));
   const navigate = useNavigate();
 
   // Сохраняем токены в localStorage и стейт
@@ -73,28 +73,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   // При монтировании пытаемся загрузить текущего пользователя
-  const loadUser = useCallback(async () => {
-    const savedToken = localStorage.getItem(TOKEN_KEY);
-    if (!savedToken) {
-      setIsLoading(false);
-      return;
-    }
-    try {
-      const userData = await getMe();
-      setUser(userData);
-    } catch {
-      localStorage.removeItem(TOKEN_KEY);
-      localStorage.removeItem(REFRESH_KEY);
-      setToken(null);
-      setUser(null);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
   useEffect(() => {
-    loadUser();
-  }, [loadUser]);
+    const savedToken = localStorage.getItem(TOKEN_KEY);
+    if (!savedToken) return;
+    getMe()
+      .then((userData) => setUser(userData))
+      .catch(() => {
+        localStorage.removeItem(TOKEN_KEY);
+        localStorage.removeItem(REFRESH_KEY);
+        setToken(null);
+        setUser(null);
+      })
+      .finally(() => setIsLoading(false));
+  }, []);
 
   // Логин — сохраняем токены и загружаем пользователя
   const login = useCallback(async (email: string, password: string): Promise<LoginResult> => {

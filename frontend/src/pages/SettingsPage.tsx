@@ -1,5 +1,5 @@
 // Настройки профиля — имя, email, роль, ссылка на смену пароля
-import { useState, useEffect, type FormEvent } from 'react';
+import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { User, Lock, Loader2 } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
@@ -15,16 +15,7 @@ export default function SettingsPage() {
   const { user, refreshUser } = useAuth();
   const updateProfile = useUpdateProfile();
 
-  const [name, setName] = useState('');
-  const [initialized, setInitialized] = useState(false);
-
-  // Заполняем имя из данных пользователя
-  useEffect(() => {
-    if (user && !initialized) {
-      setName(user.name);
-      setInitialized(true);
-    }
-  }, [user, initialized]);
+  const [name, setName] = useState(user?.name || '');
 
   // Сохранение профиля
   async function handleSubmit(e: FormEvent) {

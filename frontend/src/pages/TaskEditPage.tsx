@@ -1,5 +1,5 @@
 // Редактирование задачи — та же форма, что и создание, но с предзаполненными данными
-import { useState, useEffect, type FormEvent } from 'react';
+import { useState, type FormEvent } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import cronstrue from 'cronstrue/i18n';
 import { Plus, Trash2, Eye, Loader2, ArrowLeft } from 'lucide-react';
@@ -72,35 +72,33 @@ export default function TaskEditPage() {
   const [showPreview, setShowPreview] = useState(false);
   const [initialized, setInitialized] = useState(false);
 
-  // Заполняем форму данными задачи когда она загрузилась
-  useEffect(() => {
-    if (task && !initialized) {
-      setName(task.name);
-      setUrl(task.url);
-      setDescription(task.description || '');
-      setScheduleCron(task.schedule_cron);
-      setTimeoutSeconds(task.timeout_seconds);
-      setMaxRetries(task.max_retries);
-      setNotifyOnChange(task.notify_on_change);
-      setNotifyOnError(task.notify_on_error);
-      setAiPrompt(task.ai_prompt || '');
-      setHeadersJson(task.headers ? JSON.stringify(task.headers, null, 2) : '');
-      setFields(
-        task.fields.length > 0
-          ? task.fields.map((f) => ({
-              name: f.name,
-              selector: f.selector,
-              selector_type: f.selector_type,
-              data_type: f.data_type,
-              is_list: f.is_list,
-              attribute: f.attribute || '',
-              position: f.position,
-            }))
-          : [emptyField()],
-      );
-      setInitialized(true);
-    }
-  }, [task, initialized]);
+  // Заполняем форму данными задачи когда она загрузилась (паттерн adjust-state-during-render)
+  if (task && !initialized) {
+    setName(task.name);
+    setUrl(task.url);
+    setDescription(task.description || '');
+    setScheduleCron(task.schedule_cron);
+    setTimeoutSeconds(task.timeout_seconds);
+    setMaxRetries(task.max_retries);
+    setNotifyOnChange(task.notify_on_change);
+    setNotifyOnError(task.notify_on_error);
+    setAiPrompt(task.ai_prompt || '');
+    setHeadersJson(task.headers ? JSON.stringify(task.headers, null, 2) : '');
+    setFields(
+      task.fields.length > 0
+        ? task.fields.map((f) => ({
+            name: f.name,
+            selector: f.selector,
+            selector_type: f.selector_type,
+            data_type: f.data_type,
+            is_list: f.is_list,
+            attribute: f.attribute || '',
+            position: f.position,
+          }))
+        : [emptyField()],
+    );
+    setInitialized(true);
+  }
 
   // Управление полями
   function addField() {

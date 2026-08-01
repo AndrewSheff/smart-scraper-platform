@@ -1,5 +1,5 @@
 // Настройки уведомлений — телеграм бот, чат, тестовая отправка
-import { useState, useEffect, type FormEvent } from 'react';
+import { useState, type FormEvent } from 'react';
 import { Eye, EyeOff, Send, Loader2, Bot, MessageSquare } from 'lucide-react';
 import {
   useNotificationSettings,
@@ -21,16 +21,14 @@ export default function NotificationsPage() {
   const [botToken, setBotToken] = useState('');
   const [chatId, setChatId] = useState('');
   const [showToken, setShowToken] = useState(false);
-  const [initialized, setInitialized] = useState(false);
+  const [synced, setSynced] = useState(false);
 
-  // Заполняем форму данными с сервера
-  useEffect(() => {
-    if (settings && !initialized) {
-      setBotToken(settings.telegram_bot_token || '');
-      setChatId(settings.telegram_chat_id || '');
-      setInitialized(true);
-    }
-  }, [settings, initialized]);
+  // Заполняем форму данными с сервера (паттерн adjust-state-during-render)
+  if (settings && !synced) {
+    setBotToken(settings.telegram_bot_token || '');
+    setChatId(settings.telegram_chat_id || '');
+    setSynced(true);
+  }
 
   // Сохранение настроек
   function handleSubmit(e: FormEvent) {
