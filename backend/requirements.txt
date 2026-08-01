@@ -1,0 +1,45 @@
+# Web framework
+fastapi==0.115.12
+uvicorn[standard]==0.34.2
+python-multipart==0.0.20
+
+# Database
+sqlalchemy[asyncio]==2.0.41
+asyncpg==0.30.0
+alembic==1.15.2
+
+# Validation
+pydantic==2.11.3
+pydantic-settings==2.9.1
+email-validator==2.2.0
+
+# Auth
+python-jose[cryptography]==3.4.0
+bcrypt==4.3.0
+
+# Scraping
+httpx==0.28.1
+beautifulsoup4==4.13.4
+lxml==5.4.0
+
+# AI
+anthropic==0.52.0
+openai==1.82.0
+
+# Scheduler
+apscheduler==3.11.0
+
+# Telegram notifications
+aiogram==3.19.0
+
+# Excel export
+openpyxl==3.1.5
+
+# Redis
+redis==5.3.0
+
+# Rate limiting
+slowapi==0.1.9
+
+# Logging
+structlog==25.4.0
