@@ -1,6 +1,12 @@
 """Конфиг приложения — все настройки тянутся из .env через pydantic-settings."""
 
+import warnings
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+# Дефолтные значения для сравнения — чтоб ругнуться если не поменяли
+_DEV_SECRET = "change-me-in-production-please"  # noqa: S105
+_DEV_ADMIN_PASSWORD = "admin123"  # noqa: S105
 
 
 class Settings(BaseSettings):
@@ -16,8 +22,8 @@ class Settings(BaseSettings):
     REDIS_URL: str = "redis://localhost:6379/0"
 
     # Секреты
-    SECRET_KEY: str = "change-me-in-production-please"  # noqa: S105
-    ADMIN_DEFAULT_PASSWORD: str = "admin123"  # noqa: S105
+    SECRET_KEY: str = _DEV_SECRET
+    ADMIN_DEFAULT_PASSWORD: str = _DEV_ADMIN_PASSWORD  # noqa: S105
 
     # AI — по умолчанию Claude, но можно переключить на OpenAI
     AI_PROVIDER: str = "claude"
@@ -36,3 +42,20 @@ class Settings(BaseSettings):
 
 # Синглтон конфига — импортируй и пользуйся
 settings = Settings()
+
+# Ворнинги при дефолтных секретах — не забудь поменять перед деплоем
+if settings.SECRET_KEY == _DEV_SECRET:
+    warnings.warn(
+        "SECRET_KEY не задан — используется дефолтное значение. "
+        "Обязательно задайте уникальный ключ в .env перед деплоем!",
+        UserWarning,
+        stacklevel=1,
+    )
+
+if settings.ADMIN_DEFAULT_PASSWORD == _DEV_ADMIN_PASSWORD:
+    warnings.warn(
+        "ADMIN_DEFAULT_PASSWORD не изменен — используется дефолтный пароль. "
+        "Задайте надежный пароль в .env!",
+        UserWarning,
+        stacklevel=1,
+    )
