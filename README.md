@@ -4,11 +4,12 @@
 -->
 <!-- <img src="assets/banner.png" alt="Smart Scraper Platform" width="100%"> -->
 
+> **[English version](README_EN.md)**
+
 <div align="center">
 
 # Smart Scraper Platform
 
-### Web Scraping SaaS with AI-Powered Change Detection
 ### SaaS-платформа мониторинга сайтов с AI-аналитикой
 
 [![CI/CD](https://github.com/AndrewSheff/smart-scraper-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/AndrewSheff/smart-scraper-platform/actions)
@@ -20,129 +21,125 @@
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://docker.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-**Monitor any website on a schedule. Detect changes automatically. Get AI-powered summaries and Telegram alerts.**
-
 **Мониторьте любой сайт по расписанию. Автоматическое обнаружение изменений. AI-саммари и Telegram-уведомления.**
 
-[Quick Start](#-quick-start) · [Features](#-features) · [Screenshots](#-screenshots) · [Architecture](#-architecture) · [API](#-api-documentation)
+[Быстрый старт](#-быстрый-старт) · [Возможности](#-возможности) · [Скриншоты](#-скриншоты) · [Архитектура](#-архитектура) · [API](#-api-документация)
 
 </div>
 
 ---
 
-> **The Problem:** Marketing teams check competitor prices manually every morning — 10 sites x 30 minutes. Legal departments miss regulatory updates and face fines. Procurement monitors supplier catalogs by hand. Existing solutions are either too complex (Scrapy) or too expensive ($100+/month).
+> **Проблема:** Маркетологи проверяют цены конкурентов вручную каждое утро — 10 сайтов x 30 минут. Юристы пропускают обновления регуляторов и получают штрафы. Закупщики мониторят каталоги поставщиков руками. Существующие решения или слишком сложные (Scrapy), или дорогие ($100+/мес).
 
-> **Проблема:** Маркетологи проверяют цены конкурентов вручную каждое утро — 10 сайтов x 30 минут. Юристы пропускают обновления регуляторов. Закупщики мониторят каталоги поставщиков руками. Существующие решения или слишком сложные (Scrapy), или дорогие ($100+/мес).
-
-**Smart Scraper Platform** is a self-hosted SaaS for automated web monitoring. Configure CSS/XPath selectors through a visual interface, set a schedule, and receive Telegram notifications with AI-generated summaries when data changes.
+**Smart Scraper Platform** — self-hosted SaaS для автоматизированного мониторинга сайтов. Настройте CSS/XPath-селекторы через визуальный интерфейс, задайте расписание и получайте Telegram-уведомления с AI-саммари при изменении данных.
 
 <div align="center">
 
-| Lines of Code | API Endpoints | DB Models | Pages | Tests | Docker Services |
+| Строк кода | API Endpoints | Модели БД | Страниц | Тестов | Docker-сервисов |
 |:---:|:---:|:---:|:---:|:---:|:---:|
-| **10,400+** | **31** | **6** | **13** | **48+** | **5** |
+| **10 400+** | **31** | **6** | **13** | **48+** | **5** |
 
 </div>
 
 ---
 
-## Screenshots
+## Скриншоты
 
-| Monitoring Tasks |
-|:----------------:|
+| Задачи мониторинга |
+|:------------------:|
 | ![Tasks](screenshots/dashboard.png) |
 
 ---
 
-## Features
+## Возможности
 
-**Visual Task Builder** — enter a URL, add CSS or XPath selectors, and click Preview to see extracted values instantly. No coding required.
+**Визуальный конструктор задач** — введите URL, добавьте CSS или XPath-селекторы и нажмите Preview, чтобы сразу увидеть извлеченные значения. Без написания кода.
 
-**Cron Scheduling** — run tasks from every 5 minutes to once a month. Human-readable schedule display. Manual "Run Now" for instant checks.
+**Cron-расписание** — запускайте задачи от каждых 5 минут до раза в месяц. Понятное отображение расписания. Ручной запуск "Запустить сейчас" для моментальной проверки.
 
-**Change Detection Engine** — diff comparison between runs. See exactly what changed (old value vs new value) with highlighted differences.
+**Движок обнаружения изменений** — diff-сравнение между запусками. Видите точно, что изменилось (старое значение vs новое значение) с подсвеченными различиями.
 
-**AI-Powered Summaries** — Claude or GPT analyzes changes and explains what happened and why it matters. Custom AI prompts per task for domain-specific insights.
+**AI-саммари** — Claude или GPT анализирует изменения и объясняет, что произошло и почему это важно. Настраиваемые AI-промпты для каждой задачи под конкретную предметную область.
 
-**Telegram Notifications** — instant alerts when changes are detected. Configurable per task. Includes change summary and AI analysis.
+**Telegram-уведомления** — мгновенные оповещения при обнаружении изменений. Настраиваются для каждой задачи. Включают саммари изменений и AI-анализ.
 
-**Multi-Field Extraction** — extract multiple data points per page (price, title, stock status, etc.). Each field has its own selector and label.
+**Извлечение нескольких полей** — извлекайте несколько точек данных с одной страницы (цена, заголовок, наличие на складе и т.д.). У каждого поля свой селектор и метка.
 
-**Run History** — full log of every task execution with timestamps, extracted data, and change indicators. Track trends over time.
+**История запусков** — полный лог каждого выполнения задачи с временными метками, извлеченными данными и индикаторами изменений. Отслеживайте тренды во времени.
 
-**Excel Export** — download extracted data and change history as XLSX for reporting and analysis.
+**Экспорт в Excel** — скачивайте извлеченные данные и историю изменений в XLSX для отчетности и анализа.
 
-**Role-Based Access** — Admin and User roles. Users manage their own tasks; admins see everything.
+**Ролевой доступ** — роли Admin и User. Пользователи управляют своими задачами; администраторы видят всё.
 
-**Enterprise Security** — JWT + bcrypt, rate limiting, CORS, structured logging, request tracing.
+**Enterprise-безопасность** — JWT + bcrypt, rate limiting, CORS, структурированное логирование, трассировка запросов.
 
 ---
 
-## Architecture
+## Архитектура
 
 ```
 ┌──────────────────────────────────────────────────┐
-│                    Nginx :80                      │
-│          Reverse Proxy + Security Headers         │
+│                   Nginx :80                       │
+│         Обратный прокси + заголовки безопасности  │
 ├──────────────────┬───────────────────────────────┤
 │  Frontend :3000  │        Backend :8000           │
 │  React 19 + Vite │     FastAPI + Uvicorn          │
 │  TailwindCSS v4  │     SQLAlchemy 2.0 (async)     │
-│  13 pages        │   ┌────────────────────────┐   │
-│                  │   │   Scraping Pipeline     │   │
+│  13 страниц      │   ┌────────────────────────┐   │
+│                  │   │  Пайплайн скрапинга     │   │
 │                  │   │  httpx → BS4 → Diff     │   │
-│                  │   │  → AI Summary → Alert   │   │
+│                  │   │  → AI-саммари → Алерт   │   │
 │                  │   └────────────────────────┘   │
 ├──────────────────┴───────────────────────────────┤
 │   PostgreSQL 16              Redis 7              │
-│   6 models, Alembic          Rate Limiting        │
-│   Run history                Session Cache        │
+│   6 моделей, Alembic         Rate Limiting        │
+│   История запусков           Кэш сессий           │
 │                                                    │
-│              APScheduler (cron tasks)              │
+│              APScheduler (cron-задачи)             │
 └──────────────────────────────────────────────────┘
 ```
 
-### Scraping Pipeline
+### Пайплайн скрапинга
 
 ```
-Cron trigger (or manual "Run Now")
+Cron-триггер (или ручной "Запустить сейчас")
         |
         v
-  [httpx GET target URL]
+  [httpx GET целевого URL]
         |
         v
-  [BeautifulSoup parse HTML]
+  [BeautifulSoup парсит HTML]
         |
         v
-  [Extract values by CSS/XPath selectors]
+  [Извлечение значений по CSS/XPath-селекторам]
         |
         v
-  [Compare with previous run (diff engine)]
+  [Сравнение с предыдущим запуском (diff-движок)]
         |
-        +---> No changes --> Store result, done
+        +---> Нет изменений --> Сохранить результат, готово
         |
-        +---> Changes detected:
+        +---> Изменения обнаружены:
                 |
                 v
-          [AI summary (Claude/GPT)]
+          [AI-саммари (Claude/GPT)]
                 |
                 v
-          [Telegram notification]
+          [Telegram-уведомление]
                 |
                 v
-          [Store result + diff]
+          [Сохранить результат + diff]
 ```
 
 ---
 
-## Quick Start
+## Быстрый старт
 
-### Prerequisites
-- Docker & Docker Compose v2+
-- (Optional) Telegram bot token for notifications
-- (Optional) Anthropic or OpenAI API key for AI summaries
+### Требования
+- Docker и Docker Compose v2+
+- (Опционально) Токен Telegram-бота для уведомлений
+- (Опционально) API-ключ Anthropic или OpenAI для AI-саммари
 
-### 1. Clone and configure
+### 1. Клонировать и настроить
 
 ```bash
 git clone https://github.com/AndrewSheff/smart-scraper-platform.git
@@ -150,118 +147,118 @@ cd smart-scraper-platform
 cp .env.example .env
 ```
 
-Edit `.env`:
+Отредактируйте `.env`:
 
 ```env
-SECRET_KEY=your-random-32-char-string    # required
-ADMIN_PASSWORD=SecurePass123             # required
-TELEGRAM_BOT_TOKEN=123456:ABC-DEF...    # optional
-TELEGRAM_CHAT_ID=your_chat_id           # optional
-ANTHROPIC_API_KEY=sk-ant-...             # optional
+SECRET_KEY=your-random-32-char-string    # обязательно
+ADMIN_PASSWORD=SecurePass123             # обязательно
+TELEGRAM_BOT_TOKEN=123456:ABC-DEF...    # опционально
+TELEGRAM_CHAT_ID=your_chat_id           # опционально
+ANTHROPIC_API_KEY=sk-ant-...             # опционально
 ```
 
-### 2. Launch
+### 2. Запуск
 
 ```bash
 docker compose up -d
 ```
 
-### 3. Access
+### 3. Доступ
 
-| Service | URL |
-|:--------|:----|
-| Application | http://localhost |
+| Сервис | URL |
+|:-------|:----|
+| Приложение | http://localhost |
 | API Docs (Swagger) | http://localhost/docs |
 
-Login with admin credentials, create your first scraping task.
+Войдите с учетными данными администратора и создайте первую задачу скрапинга.
 
 ---
 
-## Tech Stack
+## Технологии
 
-| Layer | Technology | Version |
-|:------|:-----------|:--------|
+| Слой | Технология | Версия |
+|:-----|:-----------|:-------|
 | **Backend** | Python, FastAPI, SQLAlchemy (async), Alembic | 3.13, 0.115, 2.0 |
-| **Scraping** | httpx, BeautifulSoup4, lxml | Async HTTP |
-| **Scheduling** | APScheduler | Cron expressions |
+| **Скрапинг** | httpx, BeautifulSoup4, lxml | Async HTTP |
+| **Планировщик** | APScheduler | Cron-выражения |
 | **Frontend** | React, TypeScript, Vite, TailwindCSS, shadcn/ui | 19, 5+, 6, v4 |
-| **Database** | PostgreSQL | 16 |
-| **Cache** | Redis | 7 |
+| **База данных** | PostgreSQL | 16 |
+| **Кэш** | Redis | 7 |
 | **AI** | Anthropic Claude, OpenAI GPT | Latest |
-| **Notifications** | Telegram Bot API (aiogram) | Instant alerts |
-| **Auth** | JWT + bcrypt | HS256 |
-| **Infra** | Docker Compose, Nginx, GitHub Actions CI/CD | Multi-stage |
+| **Уведомления** | Telegram Bot API (aiogram) | Мгновенные алерты |
+| **Авторизация** | JWT + bcrypt | HS256 |
+| **Инфраструктура** | Docker Compose, Nginx, GitHub Actions CI/CD | Multi-stage |
 
 ---
 
-## API Documentation
+## API документация
 
-Interactive Swagger at `/docs`. **31 endpoints** across 8 groups:
+Интерактивный Swagger по адресу `/docs`. **31 endpoint** в 8 группах:
 
-| Group | Prefix | Endpoints |
-|:------|:-------|:----------|
-| Auth | `/api/v1/auth` | Register, login, token refresh |
-| Tasks | `/api/v1/tasks` | CRUD, run now, pause/resume |
-| Runs | `/api/v1/runs` | Run history, results, diffs |
-| Fields | `/api/v1/fields` | Selector management per task |
-| Notifications | `/api/v1/notifications` | Telegram setup, test message |
-| Dashboard | `/api/v1/dashboard` | Stats and activity charts |
-| Users | `/api/v1/users` | User management |
-| Health | `/api/v1/health` | Liveness probe |
+| Группа | Префикс | Endpoints |
+|:-------|:--------|:----------|
+| Auth | `/api/v1/auth` | Регистрация, вход, обновление токена |
+| Tasks | `/api/v1/tasks` | CRUD, запуск, пауза/возобновление |
+| Runs | `/api/v1/runs` | История запусков, результаты, diff |
+| Fields | `/api/v1/fields` | Управление селекторами задачи |
+| Notifications | `/api/v1/notifications` | Настройка Telegram, тестовое сообщение |
+| Dashboard | `/api/v1/dashboard` | Статистика и графики активности |
+| Users | `/api/v1/users` | Управление пользователями |
+| Health | `/api/v1/health` | Проверка работоспособности |
 
 ---
 
-## Project Structure
+## Структура проекта
 
 ```
 smart-scraper-platform/
 ├── backend/
 │   ├── app/
-│   │   ├── main.py              # FastAPI app with lifespan
-│   │   ├── config.py            # Pydantic settings
+│   │   ├── main.py              # FastAPI-приложение с lifespan
+│   │   ├── config.py            # Настройки Pydantic
 │   │   ├── database.py          # Async SQLAlchemy engine
-│   │   ├── api/v1/              # 8 REST API routers
-│   │   ├── models/              # 6 SQLAlchemy models
-│   │   ├── schemas/             # Pydantic v2 schemas
-│   │   ├── services/            # Scraping, diff, AI, notifications
+│   │   ├── api/v1/              # 8 REST API роутеров
+│   │   ├── models/              # 6 SQLAlchemy-моделей
+│   │   ├── schemas/             # Pydantic v2 схемы
+│   │   ├── services/            # Скрапинг, diff, AI, уведомления
 │   │   ├── workers/             # APScheduler task runner
-│   │   └── core/                # Security, logging, exceptions
-│   ├── tests/                   # 48+ pytest tests
-│   ├── alembic/                 # Database migrations
+│   │   └── core/                # Безопасность, логирование, исключения
+│   ├── tests/                   # 48+ pytest-тестов
+│   ├── alembic/                 # Миграции базы данных
 │   └── Dockerfile
 ├── frontend/
 │   ├── src/
-│   │   ├── api/                 # Axios API clients
-│   │   ├── components/          # UI components + layout
+│   │   ├── api/                 # Axios API-клиенты
+│   │   ├── components/          # UI-компоненты + layout
 │   │   ├── contexts/            # Auth context
-│   │   ├── pages/               # 13 page components
-│   │   └── lib/                 # Utilities
+│   │   ├── pages/               # 13 компонентов страниц
+│   │   └── lib/                 # Утилиты
 │   └── Dockerfile
 ├── docker/nginx/
 ├── .github/workflows/           # CI/CD
-├── docker-compose.yml           # 5 services
+├── docker-compose.yml           # 5 сервисов
 └── .env.example
 ```
 
 ---
 
-## Environment Variables
+## Переменные окружения
 
-| Variable | Required | Default | Description |
-|:---------|:---------|:--------|:------------|
-| `SECRET_KEY` | Yes | -- | JWT signing key |
-| `ADMIN_PASSWORD` | Yes | -- | Initial admin password |
-| `DATABASE_URL` | No | Auto | PostgreSQL connection |
-| `REDIS_URL` | No | Auto | Redis connection |
-| `TELEGRAM_BOT_TOKEN` | No | -- | For Telegram alerts |
-| `TELEGRAM_CHAT_ID` | No | -- | Telegram notification target |
-| `ANTHROPIC_API_KEY` | No | -- | For Claude AI summaries |
-| `OPENAI_API_KEY` | No | -- | For GPT AI summaries |
-| `LOG_LEVEL` | No | `INFO` | Logging verbosity |
+| Переменная | Обязательна | По умолчанию | Описание |
+|:-----------|:------------|:-------------|:---------|
+| `SECRET_KEY` | Да | -- | Ключ подписи JWT |
+| `ADMIN_PASSWORD` | Да | -- | Начальный пароль администратора |
+| `DATABASE_URL` | Нет | Авто | Подключение к PostgreSQL |
+| `REDIS_URL` | Нет | Авто | Подключение к Redis |
+| `TELEGRAM_BOT_TOKEN` | Нет | -- | Для Telegram-уведомлений |
+| `TELEGRAM_CHAT_ID` | Нет | -- | Получатель Telegram-уведомлений |
+| `ANTHROPIC_API_KEY` | Нет | -- | Для AI-саммари Claude |
+| `OPENAI_API_KEY` | Нет | -- | Для AI-саммари GPT |
+| `LOG_LEVEL` | Нет | `INFO` | Уровень логирования |
 
 ---
 
-## Development
+## Разработка
 
 ```bash
 # Backend
@@ -275,16 +272,16 @@ uvicorn app.main:app --reload --port 8000
 # Frontend
 cd frontend && npm install && npm run dev
 
-# Tests
+# Тесты
 cd backend && pytest tests/ -v
 
-# Lint
+# Линтинг
 ruff check backend/
 cd frontend && npm run lint && npx tsc --noEmit
 ```
 
 ---
 
-## License
+## Лицензия
 
-[MIT](LICENSE) — free for commercial use.
+[MIT](LICENSE) — свободное использование в коммерческих проектах.
