@@ -23,7 +23,7 @@
 
 **Monitor any website on a schedule. Detect changes automatically. Get AI-powered summaries and Telegram alerts.**
 
-[Quick Start](#-quick-start) · [Features](#-features) · [Screenshots](#-screenshots) · [Architecture](#-architecture) · [API](#-api-documentation)
+[Quick Start](#quick-start) · [Features](#features) · [Screenshots](#screenshots) · [Architecture](#architecture) · [API](#api-documentation)
 
 </div>
 
